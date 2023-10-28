@@ -11,13 +11,27 @@ watch(headingInput, (newValue) => {
   localStorage.setItem('headingInput', newValue);
 })
 
-// Looks for value under the headingInput key and stores it in headingInput
+// Watches for changes in the todos variable and stores the value in local storage as a string
+// deep: true, watches for changes in nested objects within the array 
+watch(todos, (newTodos) => {
+  localStorage.setItem('todos', JSON.stringify(newTodos));
+}, {
+  deep: true
+});
+
+// Looks for value under the headingInput key and stores it in headingInput variable
+// Parse() - converts the JSON object in text format to a javascript object 
 onMounted(() => {
   headingInput.value = localStorage.getItem('headingInput') || ''
+  todos.value = JSON.parse(localStorage.getItem('todos')) || []
 })
 
-// Pushing an object with id and text to todos array + setting the input value back to an empty string 
+// Pushing an object with id and text to todos variable + setting the input value back to an empty string
+// If there is no value or only spaces the function will stop
 function addTodo() {
+  if (newTodo.value.trim() === '') {
+    return
+  }
   todos.value.push({ id: id++, text: newTodo.value })
   newTodo.value = ''
 }
@@ -32,7 +46,7 @@ function addTodo() {
     <section class="adding">
       <h3>What's on your todo list?</h3>
       <form @submit.prevent="addTodo">
-        <input v-model="newTodo" />
+        <input type="text" v-model="newTodo" />
         <button>Add todo</button>
       </form>
     </section>
