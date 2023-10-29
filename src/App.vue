@@ -35,6 +35,11 @@ function addTodo() {
   todos.value.push({ id: id++, text: newTodo.value })
   newTodo.value = ''
 }
+
+// The function iterates over all the todo items and creates another array with the elements that pass the argument in the arrow function
+function removeTodo(todo) {
+  todos.value = todos.value.filter((item) => item !== todo)
+}
 </script>
 
 <template>
@@ -57,7 +62,7 @@ function addTodo() {
         <li v-for="todo in todos" :id="todo.id">
           <input type="checkbox">
           <label>{{ todo.text }}</label>
-          <button>X</button>
+          <button @click="removeTodo(todo)">X</button>
         </li>
       </ul>
     </section>
