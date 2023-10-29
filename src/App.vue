@@ -47,26 +47,29 @@ function taskDone(todo) {
 </script>
 
 <template>
-  <main>
-    <section class="heading">
-      <h1>What's up <input type="text" placeholder="name here" v-model="headingInput" /></h1>
+  <main class="main">
+    <section class="heading__section">
+      <h1 class="heading">What's up <input class="heading__input" type="text" placeholder="name here"
+          v-model="headingInput" /></h1>
     </section>
 
-    <section class="adding">
+    <section class="adding__section">
       <h3>What's on your todo list?</h3>
-      <form @submit.prevent="addTodo">
-        <input type="text" v-model="newTodo" />
-        <button>Add todo</button>
+      <form @submit.prevent="addTodo" class="adding__form">
+        <input class="adding__input" type="text" v-model="newTodo" placeholder="write a todo" />
+        <button class="adding__button">Add todo</button>
       </form>
     </section>
 
-    <section class="list">
+    <section class="list__section">
       <h3>Todo list</h3>
-      <ul>
-        <li v-for="todo in todos" :id="todo.id">
-          <input id="check" type="checkbox" v-model="todo.isDone">
-          <label for="check" :class="{ checked: todo.isDone }">{{ todo.text }}</label>
-          <button @click="removeTodo(todo)">X</button>
+      <ul class="list__items">
+        <li v-for="todo in todos" :id="todo.id" class="list__item">
+          <div class="list__wrapper">
+            <input id="check" type="checkbox" v-model="todo.isDone">
+            <label for="check" :class="{ checked: todo.isDone }">{{ todo.text }}</label>
+          </div>
+          <button class="list__item-button" @click="removeTodo(todo)">Delete</button>
         </li>
       </ul>
     </section>
