@@ -40,6 +40,10 @@ function addTodo() {
 function removeTodo(todo) {
   todos.value = todos.value.filter((item) => item !== todo)
 }
+
+function taskDone(todo) {
+  todo.isDone = !todo.isDone;
+}
 </script>
 
 <template>
@@ -60,8 +64,8 @@ function removeTodo(todo) {
       <h3>Todo list</h3>
       <ul>
         <li v-for="todo in todos" :id="todo.id">
-          <input type="checkbox">
-          <label>{{ todo.text }}</label>
+          <input id="check" type="checkbox" v-model="todo.isDone">
+          <label for="check" :class="{ checked: todo.isDone }">{{ todo.text }}</label>
           <button @click="removeTodo(todo)">X</button>
         </li>
       </ul>
