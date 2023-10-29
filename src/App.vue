@@ -54,7 +54,11 @@ function addTodo() {
     <section class="list">
       <h3>Todo list</h3>
       <ul>
-        <li v-for="todo in todos" :id="todo.id">{{ todo.text }}</li>
+        <li v-for="todo in todos" :id="todo.id">
+          <input type="checkbox">
+          <label>{{ todo.text }}</label>
+          <button>X</button>
+        </li>
       </ul>
     </section>
   </main>
